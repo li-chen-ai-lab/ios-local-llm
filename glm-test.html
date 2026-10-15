@@ -12,7 +12,7 @@
 </head>
 <body><main>
   <h1>智谱免费 API 轻量测试</h1>
-  <p id="build-version" class="muted">轻量测试 v3 · 仅限3款免费文本模型</p>
+  <p id="build-version" class="muted">轻量测试 v4 · 已选定 GLM-4.5-Flash</p>
   <p class="notice">需要联网。点击发送后，本次问题、人设和最近最多2轮完整对话会发给智谱服务器。无需下载模型，也不需要电脑常开。</p>
   <section>
     <details><summary>首次使用：注册和获取 API Key</summary>
@@ -27,14 +27,12 @@
       <input id="api-key" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="仅在本页临时使用，不保存">
     </label>
     <small>本程序不把密钥写入浏览器存储、网址或导出文件；只用于智谱 HTTPS 请求的认证。刷新会清空聊天和密钥。</small>
-    <label>选择免费模型
+    <label>当前使用模型
       <select id="model">
-        <option value="glm-4.5-flash">GLM-4.5-Flash（默认先试）</option>
-        <option value="glm-4.7-flash">GLM-4.7-Flash</option>
-        <option value="glm-4-flash-250414">GLM-4-Flash-250414（旧版对照）</option>
+        <option value="glm-4.5-flash">GLM-4.5-Flash（已选定）</option>
       </select>
     </label>
-    <small>切换不会自动发送。各模型分别保留当前页内的上下文，不会把另一模型的回复混进去；遇到限流也不会自动切换。</small>
+    <small>已按你的选择固定为4.5-Flash。仅手动发送，遇到限流也不会自动切换模型。</small>
   </section>
   <section>
     <p class="muted">省 Token：关闭深度思考，回复上限128 tokens，只带最近2轮；无自动测试、重试或长期记忆整理。</p>
@@ -55,7 +53,7 @@
     <p id="status" role="status">尚未发送请求。填写密钥和问题后点击发送。</p>
     <p id="usage">实际 Token 用量会在回复后显示；未返回的指标标为“无法测量”。</p>
   </section>
-  <p class="muted">当前官网将列表内3款列为免费模型，仍受账号权限、速率和服务政策限制。此页不提供收费型号，失败不会自动切换。这里仅测试短期上下文，尚未开发长期记忆。</p>
+  <p class="muted">当前官网将GLM-4.5-Flash列为免费模型，仍受账号权限、速率和服务政策限制。此页不提供其它型号，失败不会自动切换。这里仅测试短期上下文，尚未开发长期记忆。</p>
   <p><a href="https://docs.bigmodel.cn/cn/guide/start/model-overview" target="_blank" rel="noopener noreferrer">官方模型与免费说明</a> · <a href="./">原本地实验页</a></p>
   <script type="module" src="./glm-test.mjs"></script>
 </main></body></html>

@@ -1,5 +1,5 @@
 export const MODEL = 'glm-4.5-flash';
-export const FREE_MODELS = ['glm-4.5-flash', 'glm-4.7-flash', 'glm-4-flash-250414'];
+export const FREE_MODELS = [MODEL];
 export const ENDPOINT = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
 export const PERSONA = '你叫阿砾，是幽默温柔的聊天伙伴。用自然中文口语回复，通常不超过50字，避免说教；记清人物与物品。';
 
