@@ -29,7 +29,8 @@ export async function requestReply(key, body, { signal, fetchImpl = fetch } = {}
   let response;
   try {
     response = await fetchImpl(ENDPOINT, {
-      method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer',
+      // Keep browser preflight minimal. This app never writes API responses to caches.
+      method: 'POST', credentials: 'omit', redirect: 'error',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
       body: JSON.stringify(body), signal,
     });
