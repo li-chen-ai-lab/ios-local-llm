@@ -1,0 +1,97 @@
+[
+  {
+    "path": "licenses/build-manifest.json",
+    "url": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/00fe7a40e57e5e8eb9fef87526a4bf28ad5846c0/web-llm-models/v0_2_86/build-manifest.json",
+    "sha256": "953417de39de4980b570a09131525fa930be94e74f384dd728d338f04feee5d2"
+  },
+  {
+    "path": "licenses/mlc-llm/LICENSE",
+    "url": "https://raw.githubusercontent.com/akaashrp/mlc-llm/42fa855891fcb5825bf0911047d7c91e8234abd1/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "path": "licenses/mlc-llm/NOTICE",
+    "url": "https://raw.githubusercontent.com/akaashrp/mlc-llm/42fa855891fcb5825bf0911047d7c91e8234abd1/NOTICE",
+    "sha256": "3a7dfb37bb96ce6f5a1cc0d6d4c8da3b8a35e6ec4692647ba0a37f6155c7e694"
+  },
+  {
+    "path": "licenses/tvm/LICENSE",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/LICENSE",
+    "sha256": "e62264b483aca7a9f8c1ac69388b476971b43975ced90ac11dbd9e9c530edb46"
+  },
+  {
+    "path": "licenses/tvm/NOTICE",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/NOTICE",
+    "sha256": "967cd2fb97712c43271e2b1c4f636c4d8823898869f0f76f65bf8a3232584f0f"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.builtin_fp16.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.builtin_fp16.txt",
+    "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.cutlass.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.cutlass.txt",
+    "sha256": "5c0ae811de8913e3285da38f4652d8bf0b1ce89f1eb28efdc0f0e94e3f564d07"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.cutlass_fpA_intB_gemm.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.cutlass_fpA_intB_gemm.txt",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.libflash_attn.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.libflash_attn.txt",
+    "sha256": "8c9ccb96c065e706135b6cbad279b721da6156e51f3a5f27c6b3329af9416d73"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.tensorrt_llm.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.tensorrt_llm.txt",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+    "path": "licenses/tvm/licenses/LICENSE.vllm.txt",
+    "url": "https://raw.githubusercontent.com/akaashrp/tvm/be03dc94b001269b88ae010d2ac352256be55579/licenses/LICENSE.vllm.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "path": "licenses/tvm-ffi/LICENSE",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/LICENSE",
+    "sha256": "bb354d8b94589ad8817f2dff029d39a1133d217407f73679d0b0311c980e511f"
+  },
+  {
+    "path": "licenses/tvm-ffi/NOTICE",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/NOTICE",
+    "sha256": "5181189219b74687e08884d813b8f98c874d0e4ba84eb7afc4bb350d22502c24"
+  },
+  {
+    "path": "licenses/tvm-ffi/licenses/LICENSE.dlpack.txt",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/licenses/LICENSE.dlpack.txt",
+    "sha256": "3e8f6bc39276a586d60c8c5aaece2ff989262181cf2b3d2a128db58f97a9300c"
+  },
+  {
+    "path": "licenses/tvm-ffi/licenses/LICENSE.libbacktrace.txt",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/licenses/LICENSE.libbacktrace.txt",
+    "sha256": "769d83cbbb817ba4e25d1f166238426aa45519981eca116011e4113087c7b7b3"
+  },
+  {
+    "path": "licenses/tvm-ffi/licenses/LICENSE.pytorch.txt",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/licenses/LICENSE.pytorch.txt",
+    "sha256": "a8a2c6b67cf8a597ffaa5c82380a6bd1b82629c0417e00673d8013d662eb500a"
+  },
+  {
+    "path": "licenses/tvm-ffi/licenses/NOTICE.pytorch.txt",
+    "url": "https://raw.githubusercontent.com/apache/tvm-ffi/df463f9bd269867fc7f4d578d62d80cc2a11d004/licenses/NOTICE.pytorch.txt",
+    "sha256": "c2cc7bf0caec7652c2b460a8a470bea1677f241e4ab8e431df34cf17f5a9fec0"
+  },
+  {
+    "path": "licenses/tvm-ffi/3rdparty/dlpack/LICENSE",
+    "url": "https://raw.githubusercontent.com/dmlc/dlpack/84d107bf416c6bab9ae68ad285876600d230490d/LICENSE",
+    "sha256": "3e8f6bc39276a586d60c8c5aaece2ff989262181cf2b3d2a128db58f97a9300c"
+  },
+  {
+    "path": "licenses/tvm-ffi/3rdparty/libbacktrace/LICENSE",
+    "url": "https://raw.githubusercontent.com/ianlancetaylor/libbacktrace/793921876c981ce49759114d7bb89bb89b2d3a2d/LICENSE",
+    "sha256": "ef8a9b3247488f8901ca60de9b17b745d7bd67e5ec1e622f80d62364572200d8"
+  }
+]
