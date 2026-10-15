@@ -15,7 +15,9 @@ export function buildRequest(history, prompt) {
   };
 }
 
-function apiError(status) {
+function apiError(status, code) {
+  if (status === 429 && code === '1302') return 'HTTP 429 · 智谱1302：账号触发速率或并发限制。建议先等待60秒，再手动发送；不会自动重试或切换模型。';
+  if (status === 429 && code === '1305') return 'HTTP 429 · 智谱1305：模型服务当前过载。请稍后手动重试；不代表已经扣费，也不会切换模型。';
   if (status === 401) return 'HTTP 401：密钥无效或已失效。请在智谱控制台确认，并重新粘贴完整密钥。';
   if (status === 403) return 'HTTP 403：账号或模型权限不足，请查看智谱控制台；不会改用收费模型。';
   if (status === 429) return 'HTTP 429：触发限流或账号用量限制。请稍后手动重试，不会自动重复请求。';
@@ -39,7 +41,14 @@ export async function requestReply(key, body, { signal, fetchImpl = fetch } = {}
     throw new Error('无法连接智谱：可能是网络、跨域或服务暂不可用。请检查联网状态；不会自动重试。');
   }
   // Never put raw provider errors, headers or credentials into diagnostics.
-  if (!response.ok) throw new Error(apiError(response.status));
+  if (!response.ok) {
+    // Only expose a short numeric code; provider messages can contain sensitive text.
+    let providerCode = null;
+    try { const data = await response.json(); const code = String(data?.error?.code ?? ''); if (/^\d{3,6}$/.test(code)) providerCode = code; } catch { /* no readable code */ }
+    const described = response.status === 429 && ['1302', '1305'].includes(providerCode);
+    const suffix = providerCode && !described ? `（智谱错误码 ${providerCode}）` : '';
+    throw Object.assign(new Error(apiError(response.status, providerCode) + suffix), { httpStatus: response.status, providerCode });
+  }
   let data;
   try { data = await response.json(); } catch { throw new Error('智谱返回了无法解析的响应。'); }
   const choice = data?.choices?.[0];
@@ -47,7 +56,9 @@ export async function requestReply(key, body, { signal, fetchImpl = fetch } = {}
   if (typeof text !== 'string' || !text.trim()) throw new Error('智谱未返回有效文本。请稍后手动重试；不会自动增加输出上限。');
   const finite = n => Number.isFinite(n) && n >= 0 ? n : null;
   return {
-    text, finishReason: typeof choice.finish_reason === 'string' ? choice.finish_reason : null,
+    text, requestedModel: MODEL,
+    returnedModel: typeof data.model === 'string' && /^glm[-a-zA-Z0-9_.]{1,80}$/.test(data.model) ? data.model : null,
+    finishReason: typeof choice.finish_reason === 'string' ? choice.finish_reason : null,
     usage: {
       promptTokens: finite(data.usage?.prompt_tokens), completionTokens: finite(data.usage?.completion_tokens),
       totalTokens: finite(data.usage?.total_tokens), reasoningTokens: finite(data.usage?.completion_tokens_details?.reasoning_tokens),
@@ -99,13 +110,14 @@ if (typeof document !== 'undefined') {
       const reply = await requestReply(secret, body, { signal: controller.signal });
       history.push({ user: text, assistant: reply.text }); history = history.slice(-50);
       const elapsedMs = Math.round(performance.now() - started);
-      records.push({ ok: true, at: new Date().toISOString(), elapsedMs, retainedPreviousRounds: (body.messages.length - 2) / 2, ...reply.usage, finishReason: reply.finishReason });
+      records.push({ ok: true, at: new Date().toISOString(), elapsedMs, requestedModel: reply.requestedModel, returnedModel: reply.returnedModel, retainedPreviousRounds: (body.messages.length - 2) / 2, ...reply.usage, finishReason: reply.finishReason });
       prompt.value = '';
       const value = n => n === null ? '无法测量' : String(n);
-      el('usage').textContent = `本次耗时 ${(elapsedMs / 1000).toFixed(2)}秒；输入 ${value(reply.usage.promptTokens)} / 输出 ${value(reply.usage.completionTokens)} / 合计 ${value(reply.usage.totalTokens)} tokens。`;
+      el('usage').textContent = `请求型号：${reply.requestedModel}\n服务端返回型号：${reply.returnedModel ?? '未提供，需查看智谱控制台'}\n本次耗时 ${(elapsedMs / 1000).toFixed(2)}秒；输入 ${value(reply.usage.promptTokens)} / 输出 ${value(reply.usage.completionTokens)} / 合计 ${value(reply.usage.totalTokens)} tokens。Token数是用量，不是扣款金额；实际费用以智谱控制台账单为准。`;
       showStatus(reply.finishReason === 'length' ? '已收到回复，但达到128 tokens上限，可能被截断。' : '已收到智谱回复。没有后台续聊或额外记忆请求。');
     } catch (error) {
-      records.push({ ok: false, at: new Date().toISOString(), elapsedMs: Math.round(performance.now() - started), error: error.message });
+      records.push({ ok: false, at: new Date().toISOString(), requestedModel: MODEL, httpStatus: error.httpStatus ?? null, providerCode: error.providerCode ?? null, elapsedMs: Math.round(performance.now() - started), error: error.message });
+      el('usage').textContent = `本次请求型号：${MODEL}。未获得本次Token用量；不沿用上一条回复的统计。实际费用以智谱控制台账单为准。`;
       showStatus(error.message, true);
     } finally {
       clearInterval(clock); clearTimeout(timeout); active = null;
